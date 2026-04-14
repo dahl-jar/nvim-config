@@ -4,15 +4,28 @@ Personal [AstroNvim](https://github.com/AstroNvim/AstroNvim) v5+ setup.
 
 ## Install
 
-```shell
-mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
-mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null
-mv ~/.local/state/nvim ~/.local/state/nvim.bak 2>/dev/null
-mv ~/.cache/nvim ~/.cache/nvim.bak 2>/dev/null
+One command on a fresh machine (macOS, Debian/Ubuntu, Arch, or Fedora):
 
-git clone https://github.com/dahl-jar/nvim-config.git ~/.config/nvim
-nvim
+```shell
+bash <(curl -fsSL https://raw.githubusercontent.com/dahl-jar/nvim-config/main/install.sh)
 ```
 
-First launch installs plugins from `lazy-lock.json` and Mason tooling. Requires
-Neovim >= 0.10, git, a Nerd Font, and ripgrep.
+It installs Neovim >= 0.10, a C toolchain, Node.js, Java, uv, ripgrep, fd,
+lazygit, and a JetBrainsMono Nerd Font via the platform's package manager
+(Homebrew / apt / pacman / dnf), backs up any existing nvim state, then clones
+this repo to `~/.config/nvim`.
+
+Then:
+
+```shell
+nvim                 # first launch bootstraps plugins + Mason
+:Codeium Auth        # one-time AI completion setup (inside nvim)
+```
+
+## Manual install
+
+If you don't want the script, install the dependencies yourself and clone:
+
+```shell
+git clone https://github.com/dahl-jar/nvim-config.git ~/.config/nvim
+```
