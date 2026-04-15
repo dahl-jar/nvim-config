@@ -1,7 +1,15 @@
+-- Side-steps E94 on paths with `[...]` (e.g. Next.js dynamic routes) by
+-- disabling neo-tree's `close_if_last_window`. AstroNvim turns that on by
+-- default, which routes us into a handler that runs `vim.cmd("b " .. buf_name)`
+-- — the `:b` ex-command treats its argument as a regex, so bracketed paths
+-- trigger E94. Disabling the feature bypasses the buggy code path entirely.
+-- We lose "auto-close neo-tree when it's the last window", which in practice
+-- means you close it manually with <Leader>e.
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)
+      opts.close_if_last_window = false
       opts.filesystem = opts.filesystem or {}
       opts.filesystem.use_libuv_file_watcher = true
       -- Avoid resolving terminal buffer names (term://...) as filesystem paths.
